@@ -1,15 +1,5 @@
 def students
-	@students = [
-		{:name => "Dr. Hannibal Lecter", :cohort => :november, :age => "23"},
-	  	{:name => "Darth Vader", :cohort => :november, :age => "23"},
-	  	{:name => "Nurse Ratched", :cohort => :november, :age => "23"},
-	  	{:name => "Michael Corleone", :cohort => :november, :age => "23"},
-	  	{:name => "Alex De Large", :cohort => :november, :age => "23"},
-	  	{:name => "The Alien", :cohort => :november, :age => "23"},
-	  	{:name => "Terminator", :cohort => :november, :age => "23"},
-	  	{:name => "Freddy Kruger", :cohort => :november, :age => "23"},
-	  	{:name => "The Joker", :cohort => :november, :age => "23"}
-	]
+	@students ||= []
 end
 
 def prompt_user_name_input
@@ -24,7 +14,10 @@ def create_student(name, cohort, age)
 	{name: name, cohort: cohort.to_sym, age: age}
 end
 
-#-------------------------
+def add_into_students(student)
+	students << student
+end
+
 
 def students_with_firstletter_a
 	students.select { |student| student[:name].start_with?("A", "a") }
@@ -35,15 +28,15 @@ def students_with_longnames
 end
 
 
+def export_student_to_csv(etudiantes)
+	etudiantes.values
+end
 
 
 
 
 
 
-# def add_into_students(create_students)
-# 	students << create_student(name, cohort)
-# end
 
 
 # def students
@@ -57,8 +50,6 @@ end
 def print_footer
 	puts "Overall, there are now #{students.length} students in our class"
 end
-
-
 
 
 
