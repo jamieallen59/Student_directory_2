@@ -1,3 +1,5 @@
+require 'csv'
+
 def students
 	@students ||= []
 end
@@ -32,7 +34,11 @@ def export_student_to_csv(etudiantes)
 	etudiantes.values
 end
 
-
+def save(sauvegarder)
+	CSV.open("./student-directory-2/lib/file.csv", "w") do |x|
+	x << export_student_to_csv
+end
+end
 
 
 

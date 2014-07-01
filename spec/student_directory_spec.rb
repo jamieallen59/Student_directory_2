@@ -52,11 +52,17 @@ describe 'student_directory' do
 	end
 
 
-	context "Loading and exporting data" do
+	context "Saving to a file" do
 		
 		it 'Exports students to CSV' do
 			etudiantes = {name: 'Roi', cohort: :June, age: "23"}
 			expect(export_student_to_csv(etudiantes)).to eq ["Roi", :June, "23"]
+		end
+
+		it 'saves the csv file' do
+			donnees = ["Roi", :June, "23"]
+			expect(save(donnees)).to receive(:<<).with(export_student_to_csv(etudiantes))
+			save(donnees)
 		end
 
 	end
