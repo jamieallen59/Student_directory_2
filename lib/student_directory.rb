@@ -35,9 +35,10 @@ def export_student_to_csv(etudiantes)
 end
 
 def save(sauvegarder)
-	CSV.open("./student-directory-2/lib/file.csv", "w") do |x|
+	CSV.open ("./lib/file.csv", "wb") do |x|
 	x << export_student_to_csv
 end
+
 end
 
 
