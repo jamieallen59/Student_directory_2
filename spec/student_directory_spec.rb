@@ -44,23 +44,82 @@ describe 'student_directory' do
 	end
 
 
-	context "Saving to a file" do
+	# context "Saving to a file" do
 		
-		it 'Exports students to CSV' do
-			etudiantes = {name: 'Roi', cohort: :June, age: "23"}
-			expect(export_student_to_csv(etudiantes)).to eq ["Roi", :June, "23"]
+		# it 'Exports students to CSV' do
+		# 	etudiantes = {name: 'Roi', cohort: :June, age: "23"}
+		# 	expect(export_student_to_csv(etudiantes)).to eq ["Roi", :June, "23"]
+		# end
+
+
+
+
+
+
+		# it 'saves the csv file' do
+		# 	# hash = {name: 'Roi', cohort: :June, age: "23"}
+		# 	donnees = ["Roi", :June, "23"]
+		# 	expect(CSV).to receive(:open).with("./lib/file.csv", "wb")
+		# 	# expect(save).to receive(:<<).with(donnees)
+		# 	save(donnees)
+		# end
+
+	# end
+
+
+
+	context 'saving the file' do
+
+		# it 'Writes text to a csv file' do
+
+		# 	f = FIle.open("")
+		# 	save("hello")
+
+		# end
+
+			let(:student) { { name: 'Mihai', cohort: 'January', age: "23"}}
+
+
+		it "transforms a student into csv" do
+			student = { name: 'Mihai', cohort: 'January', age: "23"}
+			expect(student_to_csv(student)).to eq ['Mihai', 'January', "23"]
 		end
 
-		it 'saves the csv file' do
-			# hash = {name: 'Roi', cohort: :June, age: "23"}
-			donnees = ["Roi", :June, "23"]
-			expect(CSV).to receive(:open).with("./lib/file.csv", "wb")
-			# expect(save).to receive(:<<).with(donnees)
-			save(donnees)
+		it 'saves to students' do
+			students = [student]
+			expect(CSV).to receive(:open).with("./students.csv", "wb")
+			save(student)
 		end
+
+	context "loading a previous file" do
+
+
+			it "loads a csv file" do
+				expect(CSV).to receive(:read).with("example.csv")
+				loadfile 
+			end
+
+
+			it "transforms a csv into a hash" do
+				expect(self).to receive(loadfile).and_return([["Roi", "June", "23"], ["Dave", "November", "45"]])
+				expect(readfile).to eq [{name: "Roi", cohort: "June", age: "23"}, {name: "Dave", cohort: "November", age: "45"}]
+				readfile
+			end
+
+			# 	loaded_file = CSV.read("./students.csv")
+
+			# CSV.foreach("./students.csv") do |row|
+			# 	name, cohort, age = row[0], row[1], row[2]
+			# 	@student << {name: name, cohort: cohort, age: age}
+			# end
 
 	end
 
+	# # ***shovel operater***
+	# expect(csv).to receive(:<<).with(student_to_csv(student)))
+
+
+	end
 
 
 	context "Returns students with" do
@@ -79,6 +138,57 @@ describe 'student_directory' do
 		end
 	
 	end
+
+
+	context "Printing information" do
+
+		it "prints the current array of students" do
+			input = [{name: "Roi", cohort: :June, age: "23"}]
+			expect(self).to receive(:puts).with("Roi from the June cohort is 23")
+			display_the(input)
+		end
+
+		it "prints the current array of students" do
+			input = [{name: "Jenny", cohort: :June, age: "32"}]
+			expect(self).to receive(:puts).with("Jenny from the June cohort is 32")
+			display_the(input)
+		end
+
+		# it "print the hashes from within an array" do
+		# 	input = [
+		# 	{name: "Jenny", cohort: :June, age: "32"},
+		# 	{name: "Roi", cohort: :June, age: "23"}
+		# 			]
+		# 	expect(self).to receive(:).with()
+
+	end
+
+
+
+ # context 'when inputting a cohort' do
+
+	# 	     it 'knows that a june cohort is valid' do
+	# 	     	expect(is_cohort_valid?("june")).to be true
+	# 	     end
+
+	# 	     it 'knows that a banana cohort is not valid' do
+	# 	     	expect(is_cohort_valid?("banana")).to be false
+	# 	     end
+
+	# 	     it 'only records cohort if valid' do
+	# 	     	allow(self).to receive(:take_user_input).and_return("banana","banana","june", "banana")
+		     	
+	# 	     	expect(get_input("cohort")).to eq "june"
+	# 	     end
+
+	# 	 end
+
+
+
+
+
+
+
 
 
 
